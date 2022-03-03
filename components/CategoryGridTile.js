@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 
-const CatgeoryGridTile = (props) => {
+const CategoryGridTile = (props) => {
   let TouchableComponent =
     Platform.OS === "android" && Platform.Version >= 21
       ? TouchableNativeFeedback
@@ -58,4 +58,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CatgeoryGridTile;
+export default CategoryGridTile;

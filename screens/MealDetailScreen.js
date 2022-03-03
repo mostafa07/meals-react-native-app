@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { MEALS } from "../data/dummy-data";
 
 const MealDetailScreen = (props) => {
   return (
@@ -7,6 +8,15 @@ const MealDetailScreen = (props) => {
       <Text>Meal Detail Screen!</Text>
     </View>
   );
+};
+
+MealDetailScreen.navigationOptions = (naviagtionData) => {
+  const mealId = naviagtionData.navigation.getParam("mealId");
+  const category = MEALS.find((it) => it.id === mealId);
+
+  return {
+    headerTitle: category.title,
+  };
 };
 
 const styles = StyleSheet.create({
