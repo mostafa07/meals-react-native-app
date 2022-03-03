@@ -1,5 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { CustomHeaderButton } from "../components/CustomHeaderButton";
 import { MEALS } from "../data/dummy-data";
 
 const MealDetailScreen = (props) => {
@@ -12,10 +14,21 @@ const MealDetailScreen = (props) => {
 
 MealDetailScreen.navigationOptions = (naviagtionData) => {
   const mealId = naviagtionData.navigation.getParam("mealId");
-  const category = MEALS.find((it) => it.id === mealId);
+  const meal = MEALS.find((it) => it.id === mealId);
 
   return {
-    headerTitle: category.title,
+    headerTitle: meal.title,
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Favorite"
+          iconName="ios-star"
+          onPress={() => {
+            console.log("Mark as favorite!");
+          }}
+        />
+      </HeaderButtons>
+    ),
   };
 };
 
