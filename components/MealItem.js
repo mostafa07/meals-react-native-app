@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import CustomText from "../components/CustomText";
 
 const MealItem = (props) => {
   let TouchableComponent =
@@ -32,9 +33,9 @@ const MealItem = (props) => {
             </ImageBackground>
           </View>
           <View style={styles.mealDetails}>
-            <Text>{props.item.duration}m</Text>
-            <Text>{props.item.complexity.toUpperCase()}</Text>
-            <Text>{props.item.affordability.toUpperCase()}</Text>
+            <CustomText>{props.item.duration}m</CustomText>
+            <CustomText>{props.item.complexity.toUpperCase()}</CustomText>
+            <CustomText>{props.item.affordability.toUpperCase()}</CustomText>
           </View>
         </View>
       </TouchableComponent>
