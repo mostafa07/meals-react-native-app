@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Platform } from "react-native";
 import { createAppContainer } from "react-navigation";
+import { createDrawerNavigator } from "react-navigation-drawer";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
@@ -8,6 +9,7 @@ import Colors from "../constants/Colors";
 import CategoriesScreen from "../screens/CategoriesScreen";
 import CategoryMealsScreen from "../screens/CategoryMealsScreen";
 import FavoritesScreen from "../screens/FavoritesScreen";
+import FiltersScreen from "../screens/FiltersScreen";
 import MealDetailScreen from "../screens/MealDetailScreen";
 
 const defaultStackNavigatorOptions = {
@@ -21,9 +23,6 @@ const MealsNavigator = createStackNavigator(
   {
     Categories: {
       screen: CategoriesScreen,
-      navigationOptions: {
-        headerTitle: "Meal Categories",
-      },
     },
     CategoryMeals: {
       screen: CategoryMealsScreen,
@@ -86,4 +85,39 @@ const MealsFavoritesBottomTabNavigator =
         },
       });
 
-export default createAppContainer(MealsFavoritesBottomTabNavigator);
+const FiltersStackNavigator = createStackNavigator(
+  {
+    Filters: { screen: FiltersScreen },
+  },
+  {
+    initialRouteName: "Filters",
+    defaultNavigationOptions: defaultStackNavigatorOptions,
+  }
+);
+
+const MainNavigator = createDrawerNavigator(
+  {
+    MealsFavoritesBottomTabNavigator: {
+      screen: MealsFavoritesBottomTabNavigator,
+      navigationOptions: {
+        drawerLabel: "Meals",
+      },
+    },
+    Filters: {
+      screen: FiltersStackNavigator,
+      navigationOptions: {
+        drawerLabel: "Filters",
+      },
+    },
+  },
+  {
+    contentOptions: {
+      activeTintColor: Colors.accentColor,
+      labelStyle: {
+        fontFamily: "open-sans-bold",
+      },
+    },
+  }
+);
+
+export default createAppContainer(MainNavigator);

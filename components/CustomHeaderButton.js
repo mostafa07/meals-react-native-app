@@ -1,4 +1,4 @@
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import { Platform } from "react-native";
 import { HeaderButton } from "react-navigation-header-buttons";
