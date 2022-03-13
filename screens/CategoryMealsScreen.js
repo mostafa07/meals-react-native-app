@@ -1,6 +1,7 @@
 import { React } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
+import CustomText from "../components/CustomText";
 import MealItem from "../components/MealItem";
 import { CATEGORIES } from "../data/dummy-data";
 
@@ -13,6 +14,14 @@ const CategoryMealsScreen = (props) => {
   const categoryMeals = availableMeals.filter(
     (meal) => meal.categoryIds.indexOf(categoryId) >= 0
   );
+
+  if (categoryMeals.length === 0) {
+    return (
+      <View style={styles.screen}>
+        <CustomText>Np meals found, maybe check your filters!</CustomText>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.screen}>
