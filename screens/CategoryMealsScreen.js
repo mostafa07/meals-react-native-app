@@ -8,6 +8,7 @@ const CategoryMealsScreen = (props) => {
   const categoryId = props.navigation.getParam("categoryId");
 
   const availableMeals = useSelector((state) => state.meals.filteredMeals);
+  const favoriteMeals = useSelector((state) => state.meals.favoriteMeals);
 
   const categoryMeals = availableMeals.filter(
     (meal) => meal.categoryIds.indexOf(categoryId) >= 0
@@ -20,6 +21,10 @@ const CategoryMealsScreen = (props) => {
         keyExtractor={(item, index) => item.id}
         style={{ width: "100%", padding: 16 }}
         renderItem={(itemData) => {
+          const isMealFavorited = favoriteMeals.some(
+            (it) => it.id === itemData.item.id
+          );
+
           return (
             <MealItem
               item={itemData.item}
@@ -28,6 +33,7 @@ const CategoryMealsScreen = (props) => {
                   routeName: "MealDetail",
                   params: {
                     meal: itemData.item,
+                    isFavorited: isMealFavorited,
                   },
                 });
               }}
